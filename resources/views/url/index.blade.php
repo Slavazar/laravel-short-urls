@@ -34,7 +34,9 @@
                 <td>
                     <a class="btn btn-success" href="{{ url('/urls/view/' . $url->id) }}" role="button">View</a>
                     <a class="btn btn-primary" href="{{ url('/urls/edit/' . $url->id) }}" role="button">Edit</a>
-                    <a class="btn btn-warning" href="{{ url('/urls/delete/' . $url->id) }}" role="button" data-url-id="{{ $url->id }}" onclick="delete_url(event)">Delete</a>
+                    <a id="delete-url" class="btn btn-warning delete-url" href="{{ url('/urls/delete/' . $url->id) }}" role="button" data-url-id="{{ $url->id }}">Delete</a>
+                    <span> | </span>
+                    <a class="btn btn-success get-short-url" href="{{ url('/urls/get-short-url/' . $url->id) }}" role="button" data-url-id="{{ $url->id }}">Get Short URL</a>
                 </td>
                 </tr>
             @endforeach
@@ -43,15 +45,29 @@
         {{ $urls->links('bootstrap-4') }}
     </div>
 </div>
-<script>
-function delete_url(event) {
-    var urlId = $(event.target).data('url-id');
-    var val = confirm('Are you sure to delete #' + urlId + '?');
+<script type="text/javascript">
+$(function() {
+    $(".delete-url").click(function(event) {
+        var urlId = $(this).data('url-id');
+        var val = confirm('Are you sure to delete #' + urlId + '?');
+
+        if (val == false) {
+            event.preventDefault();
+        }
+    });
     
-    if (val == false) {
+    $(".get-short-url").click(function(event) {
         event.preventDefault();
-    }
-}
+        var currentUrl = $(this).attr('href');
+        
+        $.get(currentUrl, function( data ) {
+            if (data.error == 0) {
+                alert(data.short_url);
+            }
+        });
+    });
+    
+});
 </script>
 @endsection
     

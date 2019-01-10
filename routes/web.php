@@ -25,4 +25,6 @@ Route::post('/urls/edit/{id}', 'UrlController@postEdit');
 Route::get('/urls/view/{id}', 'UrlController@getView');
 Route::get('/urls/delete/{id}', 'UrlController@getDelete');
 
+Route::get('/urls/get-short-url/{id}', 'UrlController@getShortUrl');
+
 Route::get('/go/{token}', 'GoController@getView');

@@ -118,4 +118,21 @@ class UrlController extends Controller
         
         return redirect('/urls');
     }
+    
+    public function getShortUrl($id)
+    {
+        $url = Url::find($id);
+        
+        if ($url) {
+            return response()->json([
+                'error' => 0,
+                'short_url' => $url->getShortUrl()
+            ]);
+        }
+        
+        return response()->json([
+            'error' => 1,
+            'short_url' => ''
+        ]);
+    }
 }
