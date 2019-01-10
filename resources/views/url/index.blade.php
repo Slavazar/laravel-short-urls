@@ -8,7 +8,7 @@
 </div>
 <div class="row">
     <div class="col">
-        <h2>Messages</h2>
+        <h2>URLs</h2>
         @if ($status = session()->get('status'))
             <div class="alert alert-info" role="alert">{{ $status }}</div>
         @endif
