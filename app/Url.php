@@ -16,8 +16,12 @@ class Url extends Model
         'updated_at'
     ];
     
-    public function getShortUrl()
+    public function getShortUrl($go = false)
     {
-        return url('go') . '/' . $this->url_token;
+        if ($go) {
+            return url('go') . '/' . $this->url_token;
+        }
+        
+        return url($this->url_token);
     }
 }

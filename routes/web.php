@@ -28,3 +28,6 @@ Route::get('/urls/delete/{id}', 'UrlController@getDelete');
 Route::get('/urls/get-short-url/{id}', 'UrlController@getShortUrl');
 
 Route::get('/go/{token}', 'GoController@getView');
+
+Route::get('/{token}', 'GoController@getView')->where('token', '[0-9a-z]{10}');
+
