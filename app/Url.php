@@ -19,7 +19,7 @@ class Url extends Model
     public function getShortUrl($go = false)
     {
         if ($go) {
-            return url('go') . '/' . $this->url_token;
+            return url('go' . '/' . $this->url_token);
         }
         
         return url($this->url_token);
